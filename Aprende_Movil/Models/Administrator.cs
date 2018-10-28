@@ -5,9 +5,8 @@ using System.Web;
 
 namespace Aprende_Movil.Models
 {
-	public class User:Person
+	public class Administrator:User
 	{
-		private String email { get; set; }
-		private String password { get; set; }
+
 	}
 }
