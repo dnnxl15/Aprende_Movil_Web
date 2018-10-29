@@ -7,10 +7,10 @@ namespace Aprende_Movil.Models
 {
 	public class Person
 	{
-		private String name { get; set; }
-		private String lastname { get; set; }
-		private String address { get; set; }
-		private String identification { get; set; }
-		private DateTime dateOfBirth { get; set; }
+		public String name { get; set; }
+		public String lastname { get; set; }
+		public String address { get; set; }
+		public String identification { get; set; }
+		public DateTime dateOfBirth { get; set; }
 	}
 }

@@ -7,7 +7,7 @@ namespace Aprende_Movil.Models
 {
 	public class User:Person
 	{
-		private String email { get; set; }
-		private String password { get; set; }
+		public String email { get; set; }
+		public String password { get; set; }
 	}
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Aprende_Movil.Models
+namespace Aprende_Movil.Library
 {
-	public class Administrator:User
+	public enum UserType
 	{
-		
-	}
+		RegularUser, 
+		Administrator
+	};
 }
