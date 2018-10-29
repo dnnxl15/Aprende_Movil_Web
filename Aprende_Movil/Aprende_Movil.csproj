@@ -152,10 +152,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Library\ControlType.cs" />
+    <Compile Include="Library\FactoryType.cs" />
     <Compile Include="Library\UserType.cs" />
+    <Compile Include="Models\Activity..cs" />
     <Compile Include="Models\Administrator.cs" />
+    <Compile Include="Models\Medicine.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\PersonFactory.cs" />
+    <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\RegularUser.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
