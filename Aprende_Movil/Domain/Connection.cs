@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using MySql.Data;
-using MySql.Data.MySqlClient;
 
 namespace Aprende_Movil.Domain
 {
 	public class Connection
 	{
 		private Connection connection { get; set; }
-		private MySqlConnection mySqlConnect;
+		private SqlConnection mySqlConnect;
 
 		private Connection()
 		{
-			connection = new MySqlConnection(Library.IDataInfo.CONNECTION);
+			connection = new SqlConnection(Library.IDataInfo.CONNECTION);
 		}
 
 		public Connection getInstance()
@@ -34,7 +29,7 @@ namespace Aprende_Movil.Domain
 				mySqlConnect.Open();
 				return true;
 			}
-			catch (MySqlException ex)
+			catch (SqlException ex)
 			{
 				switch (ex.Number)
 				{
@@ -55,10 +50,15 @@ namespace Aprende_Movil.Domain
 				mySqlConnect.Close();
 				return true;
 			}
-			catch (MySqlException ex)
+			catch (SqlException ex)
 			{
 				return false;
 			}
+		}
+
+		public static implicit operator Connection(SqlConnection v)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
