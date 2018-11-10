@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Aprende_Movil.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Aprende_Movil.Domain
@@ -20,6 +23,27 @@ namespace Aprende_Movil.Domain
 				connection = new Connection();
 			}
 			return connection;
+		}
+
+		public void request(String pProcedure, List<Parameter> pParameters)
+		{
+			SqlCommand command = new SqlCommand(pProcedure, this.mySqlConnect);
+			command.CommandType = CommandType.StoredProcedure;
+			foreach (var parameter in pParameters)
+			{
+				command.Parameters.AddWithValue(parameter.field, parameter.value);          // Set the parameter
+			}
+			SqlTransaction trx = this.mySqlConnect.BeginTransaction(); // Begin the transaction
+			try
+			{
+				command.Prepare();
+			}
+			catch (Exception e)
+			{
+			}
+			command.Transaction = trx;
+			command.ExecuteNonQuery();
+			trx.Commit();
 		}
 
 		public bool OpenConnection()

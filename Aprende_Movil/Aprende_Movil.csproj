@@ -164,6 +164,7 @@
     <Compile Include="Models\Activity..cs" />
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Medicine.cs" />
+    <Compile Include="Models\Parameter.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\PersonFactory.cs" />

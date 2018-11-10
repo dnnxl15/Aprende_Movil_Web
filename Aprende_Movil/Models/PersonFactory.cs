@@ -24,28 +24,18 @@ namespace Aprende_Movil.Models
 			return instance;
 		}
 
-		public Person getPerson(UserType pUserType, String pName, 
-			String pLastname, String pPassword,
-			String pEmail, int pId)
+		public User getPerson(UserType pUser, String pName, String pLastname, String pPassword, String pEmail)
 		{
-			User person = null;
-			if(pUserType == UserType.Administrator)
+			User user = null;
+			if (pUser == UserType.Administrator)
 			{
-				person = new Administrator();
-				person.name = pName;
-				person.lastname = pLastname;
-				person.email = pEmail;
-				person.password = pPassword;
+				user = new Administrator(pName, pLastname, pPassword, pEmail);
 			}
-			else
+			else if(pUser == UserType.RegularUser)
 			{
-				person = new RegularUser();
-				person.name = pName;
-				person.lastname = pLastname;
-				person.email = pEmail;
-				person.password = pPassword;
+				user = new RegularUser(pName, pLastname, pPassword, pEmail);
 			}
-			return person;
+			return user;
 		}
 	}
 }
