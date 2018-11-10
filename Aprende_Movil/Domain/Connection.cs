@@ -8,7 +8,7 @@ namespace Aprende_Movil.Domain
 {
 	public class Connection
 	{
-		private Connection connection { get; set; }
+		private static Connection connection { get; set; }
 		private SqlConnection mySqlConnect;
 
 		private Connection()
@@ -16,7 +16,7 @@ namespace Aprende_Movil.Domain
 			connection = new SqlConnection(Library.IDataInfo.CONNECTION);
 		}
 
-		public Connection getInstance()
+		public static Connection getInstance()
 		{
 			if(connection == null)
 			{
