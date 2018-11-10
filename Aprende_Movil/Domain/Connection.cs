@@ -25,7 +25,7 @@ namespace Aprende_Movil.Domain
 			return connection;
 		}
 
-		public void request(String pProcedure, List<Parameter> pParameters)
+		public SqlTransaction request(String pProcedure, List<Parameter> pParameters)
 		{
 			SqlCommand command = new SqlCommand(pProcedure, this.mySqlConnect);
 			command.CommandType = CommandType.StoredProcedure;
@@ -44,6 +44,7 @@ namespace Aprende_Movil.Domain
 			command.Transaction = trx;
 			command.ExecuteNonQuery();
 			trx.Commit();
+			return trx;
 		}
 
 		public bool OpenConnection()
