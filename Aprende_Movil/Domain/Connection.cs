@@ -58,23 +58,31 @@ namespace Aprende_Movil.Domain
 
 		public bool OpenConnection()
 		{
-			try
+			if(mySqlConnect.State == ConnectionState.Open)
 			{
-				mySqlConnect.Open();
 				return true;
 			}
-			catch (MySqlException ex)
+			else
 			{
-				switch (ex.Number)
+				try
 				{
-					case 0:
-						break;
-
-					case 1045:
-						break;
+					mySqlConnect.Open();
+					return true;
 				}
-				return false;
+				catch (MySqlException ex)
+				{
+					switch (ex.Number)
+					{
+						case 0:
+							break;
+
+						case 1045:
+							break;
+					}
+					return false;
+				}
 			}
+			
 		}
 
 		public bool CloseConnection()

@@ -14,7 +14,6 @@ namespace Aprende_Movil.Domain
 
 		private ControllerPayment()
 		{
-
 		}
 
 		public static ControllerPayment getInstance()
@@ -29,6 +28,7 @@ namespace Aprende_Movil.Domain
 		public Boolean addPayment(Payment pPayment)
 		{
 			Connection connect = Connection.getInstance();
+			if()
 			connect.OpenConnection();
 			List<Parameter> listParameter = new List<Parameter>();
 			Parameter parameter1 = new Parameter();
