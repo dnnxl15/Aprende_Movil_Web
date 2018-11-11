@@ -8,6 +8,6 @@ namespace Aprende_Movil.Models
 	public class Parameter
 	{
 		public String field { get; set; }
-		public String valueObject { get; set; }
+		public Object valueObject { get; set; }
 	}
 }
