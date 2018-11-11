@@ -7,9 +7,9 @@ namespace Aprende_Movil.Library
 {
 	public class IDataInfo
 	{
-		public const string PASSWORD = "";
+		public const string PASSWORD = "12";
 		public const string SERVER = "localhost";
-		public const string DATABASE = "proyecto";
+		public const string DATABASE = "aprendemovil";
 		public const string USERNAME = "Admin";
 		public const string CONNECTION = "SERVER=" + SERVER + ";" + "DATABASE=" + DATABASE + ";" + "UID=" + USERNAME + ";" + "PASSWORD=" + PASSWORD + ";";
 	}

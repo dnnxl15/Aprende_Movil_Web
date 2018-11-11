@@ -1,5 +1,6 @@
 ﻿using Aprende_Movil.Library;
 using Aprende_Movil.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,8 +29,6 @@ namespace Aprende_Movil.Domain
 		public Boolean addPayment(Payment pPayment)
 		{
 			Connection connect = Connection.getInstance();
-			if()
-			connect.OpenConnection();
 			List<Parameter> listParameter = new List<Parameter>();
 			Parameter parameter1 = new Parameter();
 			parameter1.field = IConstant.PARAMETER_NAME;
@@ -44,40 +43,19 @@ namespace Aprende_Movil.Domain
 			return true;
 		}
 
-		public Boolean deletePayment(int pId)
+		public Boolean loadData()
 		{
-			foreach (var parameter in listPayment)
+			Connection connection = Connection.getInstance();
+			Boolean open = connection.OpenConnection();
+			MySqlDataReader reader = connection.request("getPayment", new List<Parameter>());
+			List<Payment> listPayment = new List<Payment>();
+			while (reader.Read())
 			{
-				int id = parameter.paymentID;
-				if(id == pId)
-				{
-					listPayment.Remove(parameter);
-					return true;
-				}
-				
+				Payment payment = new Payment();
+				payment.name = reader.GetString("name");
+				listPayment.Add(payment);
 			}
-			return false;
-		}
-
-		public Boolean updatePayment(int pId, Payment pPayment)
-		{ 
-			foreach (var parameter in listPayment)
-			{
-				int id = parameter.paymentID;
-				if (id == pId)
-				{
-					listPayment.Remove(parameter);
-					listPayment.Add(pPayment);
-					return true;
-				}
-
-			}
-			return false;
-		}
-
-		// FALTA 
-		private Boolean loadData()
-		{
+			this.listPayment = listPayment;
 			return true;
 		}
 	}

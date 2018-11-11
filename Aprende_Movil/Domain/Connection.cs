@@ -27,7 +27,7 @@ namespace Aprende_Movil.Domain
 			return connection;
 		}
 
-		public MySqlTransaction request(String pProcedure, List<Parameter> pParameters)
+		public MySqlDataReader request(String pProcedure, List<Parameter> pParameters)
 		{
 			if (mySqlConnect.State == ConnectionState.Closed)
 			{
@@ -42,18 +42,20 @@ namespace Aprende_Movil.Domain
 				Console.WriteLine(parameter.valueObject);
 			}
 			MySqlTransaction trx = mySqlConnect.BeginTransaction(); // Begin the transaction
+
+			MySqlDataReader reader = null;
 			try
 			{
 				command.Prepare();
 				command.Transaction = trx;
-				command.ExecuteNonQuery();
+				trx.Commit();
+				reader = command.ExecuteReader();
 			}
 			catch (Exception e)
 			{
 			}
 
-			trx.Commit();
-			return trx;
+			return reader;
 		}
 
 		public bool OpenConnection()
