@@ -1,4 +1,6 @@
-﻿using Aprende_Movil.Models;
+﻿using Aprende_Movil.Library;
+using Aprende_Movil.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,40 +11,47 @@ namespace Aprende_Movil.Domain
 	public class Connection
 	{
 		private static Connection connection { get; set; }
-		private SqlConnection mySqlConnect;
+		private MySqlConnection mySqlConnect;
 
 		private Connection()
 		{
-			connection = new SqlConnection(Library.IDataInfo.CONNECTION);
+			mySqlConnect = new MySqlConnection(IDataInfo.CONNECTION);
 		}
 
 		public static Connection getInstance()
 		{
-			if(connection == null)
+			if (connection == null)
 			{
 				connection = new Connection();
 			}
 			return connection;
 		}
 
-		public SqlTransaction request(String pProcedure, List<Parameter> pParameters)
+		public MySqlTransaction request(String pProcedure, List<Parameter> pParameters)
 		{
-			SqlCommand command = new SqlCommand(pProcedure, this.mySqlConnect);
-			command.CommandType = CommandType.StoredProcedure;
-			foreach (var parameter in pParameters)
+			if (mySqlConnect.State == ConnectionState.Closed)
 			{
-				command.Parameters.AddWithValue(parameter.field, parameter.value);          // Set the parameter
+				mySqlConnect.Open();
 			}
-			SqlTransaction trx = this.mySqlConnect.BeginTransaction(); // Begin the transaction
+			MySqlCommand command = new MySqlCommand(pProcedure, this.mySqlConnect);
+			command.CommandType = CommandType.StoredProcedure;
+			foreach (Parameter parameter in pParameters)
+			{
+				command.Parameters.AddWithValue(parameter.field, parameter.valueObject);          // Set the parameter
+				Console.WriteLine(parameter.field);
+				Console.WriteLine(parameter.valueObject);
+			}
+			MySqlTransaction trx = mySqlConnect.BeginTransaction(); // Begin the transaction
 			try
 			{
 				command.Prepare();
+				command.Transaction = trx;
+				command.ExecuteNonQuery();
 			}
 			catch (Exception e)
 			{
 			}
-			command.Transaction = trx;
-			command.ExecuteNonQuery();
+
 			trx.Commit();
 			return trx;
 		}
@@ -54,7 +63,7 @@ namespace Aprende_Movil.Domain
 				mySqlConnect.Open();
 				return true;
 			}
-			catch (SqlException ex)
+			catch (MySqlException ex)
 			{
 				switch (ex.Number)
 				{
@@ -75,13 +84,13 @@ namespace Aprende_Movil.Domain
 				mySqlConnect.Close();
 				return true;
 			}
-			catch (SqlException ex)
+			catch (MySqlException ex)
 			{
 				return false;
 			}
 		}
 
-		public static implicit operator Connection(SqlConnection v)
+		public static implicit operator Connection(MySqlConnection v)
 		{
 			throw new NotImplementedException();
 		}
