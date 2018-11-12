@@ -2,30 +2,72 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        /*Create a center align class*/
+        .centerimage {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            height: auto;
+        }
+        .bottom {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            vertical-align: bottom
+        }
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 33%;
+            padding: 10px;
+        }
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+        @@media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Bienvenido: </h2>
+    <div class="row">
+        <div class="column" style="background-color:#aaa;">
+            <h2>Pagos de Servicios</h2>
+            <p>Utilizando su cuenta puede pagar los servicios que estén afiliados con nuestra plataforma.</p>
+            <img src="~/Images/PublicServices.jpg" alt="Servicios públicos" class="centerimage">
+            <button class="bottom" onclick="location.href='@Url.Action("Index", "PaymentsServices")'">Ingresar</button>
+        </div>
+        <div class="column" style="background-color:#bbb;">
+            <h2>Calendario</h2>
+            <p>Agregue, vea y edite eventos de su vida diaria para que nunca se pierda esos momentos importantes de su vida.</p>
+            <img src="~/Images/Calendar.jpg" alt="Calendario" class="centerimage">
+            <button class="bottom" onclick="location.href='@Url.Action("Index", "Calendar")'">Ingresar</button>
+        </div>
+        <div class="column" style="background-color:#aaa;">
+            <h2>Medicamentos</h2>
+            <p>Organice sus medicamentos y no se olvide nunca más de sus dosis y horarios</p>
+            <img src="~/Images/Medicines.jpg" alt="Medicinas ordenadas" class="centerimage">
+            <button class="bottom" onclick="location.href='@Url.Action("Index", "Medicines")'">Ingresar</button>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+</body>
+</html>

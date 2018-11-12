@@ -16,8 +16,8 @@ namespace Aprende_Movil.Models
 			this.email = pEmail;
 		}
 
-		override
-		public UserType getType()
+
+        override public  UserType getType()
 		{
 			return UserType.Administrator;
 		}

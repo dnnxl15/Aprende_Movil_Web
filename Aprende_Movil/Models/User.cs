@@ -6,14 +6,16 @@ using System.Web;
 
 namespace Aprende_Movil.Models
 {
-	public class User:Person
+	public abstract class User:Person
 	{
 		public String email { get; set; }
 		public String password { get; set; }
 
+        public abstract UserType getType();
+        /*
 		public abstract UserType getType()
 		{
 			return UserType.Administrator;
-		}
-	}
+		}*/
+    }
 }
