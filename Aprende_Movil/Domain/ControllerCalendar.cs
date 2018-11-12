@@ -144,7 +144,7 @@ namespace Aprende_Movil.Domain
 				Activity activity = new Activity();
 
 				activity.reminder = reader.GetString("reminder");
-				activity.notice = reader.GetDateTime("notice");
+				activity.noticeTime = reader.GetDateTime("notice");
 				activity.startTime = reader.GetDateTime("startTime");
 				activity.endTime = reader.GetDateTime("endTime");
 				listActivity.Add(activity);

@@ -11,6 +11,8 @@ namespace Aprende_Movil.Models
 		public String reminder { get; set; }
 		public DateTime startTime { get; set; }
 		public DateTime endTime { get; set; }
-		public DateTime notice { get; set; }
+		public int notice { get; set; }
+		public DateTime noticeTime { get; set; }
+
 	}
 }

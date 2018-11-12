@@ -168,7 +168,7 @@
     <Compile Include="Library\IConstant.cs" />
     <Compile Include="Library\IDataInfo.cs" />
     <Compile Include="Library\UserType.cs" />
-    <Compile Include="Models\Activity..cs" />
+    <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Medicine.cs" />
     <Compile Include="Models\Parameter.cs" />
