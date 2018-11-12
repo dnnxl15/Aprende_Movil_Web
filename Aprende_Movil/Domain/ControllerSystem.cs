@@ -29,7 +29,7 @@ namespace Aprende_Movil.Domain
 			FactoryProducer factory = FactoryProducer.getInstance();
 			AbstractFactory controlFactory = factory.getFactory(Library.FactoryType.ControlFactoryType);
 			Controller control = controlFactory.getControl(Library.ControlType.ControlUser);
-			User user = new User();
+            RegularUser user = new RegularUser();
 			user.email = pEmail;
 			user.password = pPassword;
 			Boolean value = control.checkUser(user);

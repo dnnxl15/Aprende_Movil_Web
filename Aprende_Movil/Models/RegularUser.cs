@@ -16,7 +16,14 @@ namespace Aprende_Movil.Models
 			this.email = pEmail;
 		}
 
-		override
+        public RegularUser() {
+            this.name = "";
+            this.lastname = "";
+            this.password = "";
+            this.email = "";
+        }
+
+        override
 		public UserType getType()
 		{
 			return UserType.RegularUser;

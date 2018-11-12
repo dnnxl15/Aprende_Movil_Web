@@ -2,4 +2,96 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Pago de Servicios</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+        * {
+            box-sizing: border-box;
+        }
+        /*Create a center align class*/
+        .centerimage {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            height: auto;
+        }
+
+        .bottom {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            vertical-align: bottom
+        }
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 33%;
+            padding: 10px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+        @@media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Pago de Servicios</h2>
+        <button>Estadísticas de pagos</button>
+    </div>
+    <div class="row">
+        <div class="column" style="background-color:#fff;">
+            <h2>Pendientes</h2>
+            <div style="overflow-x:auto;overflow-y:auto">
+                <table id="table_pending">
+                    <tr>
+                        <th>Identificador</th>
+                        <th>Descripcion</th>
+                        <th>Monto</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="column" style="background-color:#fff;">
+            <h2>Cancelados</h2>
+            <div style="overflow-x:auto;overflow-y:auto">
+                <table id="table_cancelled">
+                    <tr>
+                        <th>Identificador</th>
+                        <th>Descripcion</th>
+                        <th>Monto</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
