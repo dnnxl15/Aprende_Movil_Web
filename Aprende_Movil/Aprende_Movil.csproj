@@ -148,12 +148,18 @@
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Domain\AbstractFactory.cs" />
     <Compile Include="Controllers\MedicinesController.cs" />
     <Compile Include="Controllers\PaymentsServicesController.cs" />
     <Compile Include="Domain\Connection.cs" />
+    <Compile Include="Domain\ControlFactory.cs" />
     <Compile Include="Domain\Controller.cs" />
+    <Compile Include="Domain\ControllerCalendar.cs" />
+    <Compile Include="Domain\ControllerMedicine.cs" />
     <Compile Include="Domain\ControllerPayment.cs" />
+    <Compile Include="Domain\ControllerSystem.cs" />
     <Compile Include="Domain\ControllerUser.cs" />
+    <Compile Include="Domain\FactoryProducer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

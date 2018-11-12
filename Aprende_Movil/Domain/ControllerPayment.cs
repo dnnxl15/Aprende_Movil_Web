@@ -26,7 +26,7 @@ namespace Aprende_Movil.Domain
 			return instance;
 		}
 
-		public Boolean addPayment(Payment pPayment)
+		public override Boolean addPayment(Payment pPayment)
 		{
 			Connection connect = Connection.getInstance();
 			List<Parameter> listParameter = new List<Parameter>();
@@ -34,25 +34,34 @@ namespace Aprende_Movil.Domain
 			parameter1.field = IConstant.PARAMETER_NAME;
 			parameter1.valueObject = pPayment.name;
 			Parameter parameter2 = new Parameter();
-			parameter2.field = IConstant.PARAMETER_FREQUENCY;
+			parameter2.field = IConstant.PARAMETER_AMOUNT;
 			parameter2.valueObject = pPayment.frequency;
+			Parameter parameter3 = new Parameter();
+			parameter3.field = IConstant.PARAMETER_EMAIL;
+			parameter3.valueObject = user.email;
 			listParameter.Add(parameter2);
 			listParameter.Add(parameter1);
+			listParameter.Add(parameter3);
+
 			connect.request(IConstant.PROCEDURE_INSERT_PAYMENT, listParameter);
 			listPayment.Add(pPayment);
 			return true;
 		}
 
-		public Boolean loadData()
+		public override Boolean loadData()
 		{
 			Connection connection = Connection.getInstance();
 			Boolean open = connection.OpenConnection();
-			MySqlDataReader reader = connection.request("getPayment", new List<Parameter>());
+			List<Parameter> listParameter = new List<Parameter>();
+			Parameter parameter1 = new Parameter();
+			parameter1.field = IConstant.PARAMETER_EMAIL;
+			parameter1.valueObject = user.email;
+			MySqlDataReader reader = connection.request(IConstant.PROCEDURE_GET_PAYMENT, listParameter);
 			List<Payment> listPayment = new List<Payment>();
 			while (reader.Read())
 			{
 				Payment payment = new Payment();
-				payment.name = reader.GetString("name");
+				payment.name = reader.GetString(IConstant.VALUE_NAME);
 				listPayment.Add(payment);
 			}
 			this.listPayment = listPayment;

@@ -10,5 +10,6 @@ namespace Aprende_Movil.Models
 		public int medicineID { get; set; }
 		public String name { get; set; }
 		public int quantity { get; set; }
+		public int measure { get; set; }
 	}
 }

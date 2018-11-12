@@ -1,4 +1,5 @@
-﻿using Aprende_Movil.Library;
+﻿using Aprende_Movil.Domain;
+using Aprende_Movil.Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Web;
 
 namespace Aprende_Movil.Models
 {
-	public class PersonFactory
+	public class PersonFactory:AbstractFactory
 	{
 		private static PersonFactory instance;
 
@@ -24,6 +25,7 @@ namespace Aprende_Movil.Models
 			return instance;
 		}
 
+		
 		public User getPerson(UserType pUser, String pName, String pLastname, String pPassword, String pEmail)
 		{
 			User user = null;

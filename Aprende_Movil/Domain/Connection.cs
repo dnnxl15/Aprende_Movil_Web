@@ -58,6 +58,39 @@ namespace Aprende_Movil.Domain
 			return reader;
 		}
 
+		public MySqlParameter requestFunction(String pFunction, List<Parameter> pParameters)
+		{
+			if (mySqlConnect.State == ConnectionState.Closed)
+			{
+				mySqlConnect.Open();
+			}
+			MySqlCommand command = new MySqlCommand(pFunction, this.mySqlConnect);
+			command.CommandType = CommandType.StoredProcedure;
+			MySqlParameter myRetParam = new MySqlParameter();
+			myRetParam.Direction = System.Data.ParameterDirection.ReturnValue;
+			command.Parameters.Add(myRetParam);
+			foreach (Parameter parameter in pParameters)
+			{
+				command.Parameters.AddWithValue(parameter.field, parameter.valueObject);          // Set the parameter
+				Console.WriteLine(parameter.field);
+				Console.WriteLine(parameter.valueObject);
+			}
+			MySqlTransaction trx = mySqlConnect.BeginTransaction(); // Begin the transaction
+
+			MySqlDataReader reader = null;
+			try
+			{
+				command.Prepare();
+				command.Transaction = trx;
+				trx.Commit();
+				reader = command.ExecuteReader();
+			}
+			catch (Exception e)
+			{
+			}
+			return myRetParam;
+		}
+
 		public bool OpenConnection()
 		{
 			if(mySqlConnect.State == ConnectionState.Open)
