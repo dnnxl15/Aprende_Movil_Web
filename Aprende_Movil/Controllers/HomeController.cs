@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aprende_Movil.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,12 +9,15 @@ namespace Aprende_Movil.Controllers
 {
 	public class HomeController : Controller
 	{
-		public ActionResult Index()
-		{
-			return View();
-		}
 
-		public ActionResult About()
+        public ActionResult Index(string name) {
+            LoginSingleton.setUser(Request.Form["userName"]);
+
+            ViewBag.UserName = LoginSingleton.getUserName();
+            return View();
+        }
+
+        public ActionResult About()
 		{
 			ViewBag.Message = "Your application description page.";
 

@@ -47,27 +47,57 @@
     </style>
 </head>
 <body>
-
-    <h2>Bienvenido: </h2>
+    @{
+        var title = "";
+        var isLogged = false;
+        if (!IsPost) {
+            title = "Debe iniciar sesión para poder continuar";
+        }
+        else {
+            title = "Bienvenido: " + ViewBag.UserName;
+            isLogged = true;
+        }
+    }
+    @*
+        @{
+            var title = "";
+            var isLogged = false;
+            if (ViewBag.UserName == null) {
+                title = "Debe iniciar sesión para poder continuar";
+            }
+            else {
+                title = "Bienvenido: " + ViewBag.UserName;
+                isLogged = true;
+            }
+        }
+    *@
+    <h2>@title</h2>
+    @if (!isLogged) {<button class="bottom" onclick="location.href='@Url.Action("Index", "Login")'">Ingresar</button>}
     <div class="row">
         <div class="column" style="background-color:#aaa;">
             <h2>Pagos de Servicios</h2>
             <p>Utilizando su cuenta puede pagar los servicios que estén afiliados con nuestra plataforma.</p>
             <img src="~/Images/PublicServices.jpg" alt="Servicios públicos" class="centerimage">
-            <button class="bottom" onclick="location.href='@Url.Action("Index", "PaymentsServices")'">Ingresar</button>
+            @{if (isLogged) { <button class="bottom" onclick="location.href='@Url.Action("Index", "PaymentsServices")'">Ingresar</button> }
+                else {<button class="bottom" disabled>Ingresar</button>} }
+
         </div>
         <div class="column" style="background-color:#bbb;">
             <h2>Calendario</h2>
             <p>Agregue, vea y edite eventos de su vida diaria para que nunca se pierda esos momentos importantes de su vida.</p>
             <img src="~/Images/Calendar.jpg" alt="Calendario" class="centerimage">
-            <button class="bottom" onclick="location.href='@Url.Action("Index", "Calendar")'">Ingresar</button>
+            @{if (isLogged) {<button class="bottom" onclick="location.href='@Url.Action("Index", "Calendar", new {name=ViewBag.UserName})'">Ingresar</button>}
+                else {<button class="bottom" disabled>Ingresar</button>} }
         </div>
         <div class="column" style="background-color:#aaa;">
             <h2>Medicamentos</h2>
-            <p>Agregue sus medicamentos y no se olvide nunca más de sus dosis y horarios haciendo uso del organizador. Además le indica cuándo ha terminado el 
-            consumo del medicamento.</p>
+            <p>
+                Agregue sus medicamentos y no se olvide nunca más de sus dosis y horarios haciendo uso del organizador. Además le indica cuándo ha terminado el
+                consumo del medicamento.
+            </p>
             <img src="~/Images/Medicines.jpg" alt="Medicinas ordenadas" class="centerimage">
-            <button class="bottom" onclick="location.href='@Url.Action("Index", "Medicines")'">Ingresar</button>
+            @{if (isLogged) {<button class="bottom" onclick="location.href='@Url.Action("Index", "Medicines")'">Ingresar</button>}
+                else {<button class="bottom" disabled>Ingresar</button>} }
         </div>
     </div>
 </body>

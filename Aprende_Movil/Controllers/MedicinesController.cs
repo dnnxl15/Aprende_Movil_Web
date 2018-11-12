@@ -9,9 +9,12 @@ namespace Aprende_Movil.Controllers
     public class MedicinesController : Controller
     {
         // GET: Medicines
-        public ActionResult Index()
+        public ActionResult Index(string name)
         {
+            ViewBag.UserName = name;
             return View();
         }
+
+
     }
 }

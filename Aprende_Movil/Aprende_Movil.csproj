@@ -170,6 +170,7 @@
     <Compile Include="Library\UserType.cs" />
     <Compile Include="Models\Activity..cs" />
     <Compile Include="Models\Administrator.cs" />
+    <Compile Include="Models\LoginSingleton.cs" />
     <Compile Include="Models\Medicine.cs" />
     <Compile Include="Models\Parameter.cs" />
     <Compile Include="Models\Payment.cs" />
