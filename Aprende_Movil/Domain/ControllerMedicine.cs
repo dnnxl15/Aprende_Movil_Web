@@ -105,6 +105,8 @@ namespace Aprende_Movil.Domain
 			connect.CloseConnection();
 			loadData();
 			connect.request("updateMedication", listParameter);
+
+            return true;
 		}
 
 		public override Boolean loadData()

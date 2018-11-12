@@ -23,10 +23,11 @@ namespace Aprende_Movil.Models
             this.email = "";
         }
 
+        /*
         override
 		public UserType getType()
 		{
 			return UserType.RegularUser;
-		}
+		}*/
 	}
 }
