@@ -59,54 +59,49 @@ namespace Aprende_Movil.Domain
 
 			listActivity.Add(pActivity);
 			connect.request("insertCalendar", listParameter);
+			connect.CloseConnection();
 			return true;
 		}
 
 		public override void updateActivity(Activity pActivity, String pReminder)
 		{
-			foreach (Activity activity in listActivity)
-			{
-				if (pActivity.reminder == pReminder)
-				{
-					listActivity.Remove(activity);
-					listActivity.Add(pActivity);
+			Connection connect = Connection.getInstance();
+			List<Parameter> listParameter = new List<Parameter>();
 
-					Connection connect = Connection.getInstance();
-					List<Parameter> listParameter = new List<Parameter>();
+			Parameter parameter1 = new Parameter();
+			parameter1.field = "@pReminder";
+			parameter1.valueObject = pActivity.reminder;
 
-					Parameter parameter1 = new Parameter();
-					parameter1.field = "@pReminder";
-					parameter1.valueObject = pReminder;
+			Parameter parameter2 = new Parameter();
+			parameter2.field = "@pNewStartTime";
+			parameter2.valueObject = pActivity.startTime;
 
-					Parameter parameter2 = new Parameter();
-					parameter2.field = "@pNewStartTime";
-					parameter2.valueObject = pActivity.startTime;
+			Parameter parameter3 = new Parameter();
+			parameter3.field = "@pEmail";
+			parameter3.valueObject = user.email;
 
-					Parameter parameter3 = new Parameter();
-					parameter3.field = "@pEmail";
-					parameter3.valueObject = user.email;
+			Parameter parameter4 = new Parameter();
+			parameter4.field = "@pNewNotice";
+			parameter4.valueObject = pActivity.notice;
 
-					Parameter parameter4 = new Parameter();
-					parameter4.field = "@pNewNotice";
-					parameter4.valueObject = pActivity.notice;
+			Parameter parameter5 = new Parameter();
+			parameter5.field = "@pNewEndTime";
+			parameter5.valueObject = pActivity.endTime;
 
-					Parameter parameter5 = new Parameter();
-					parameter5.field = "@pNewEndTime";
-					parameter5.valueObject = pActivity.endTime;
+			Parameter parameter6 = new Parameter();
+			parameter6.field = "@pNewReminder";
+			parameter6.valueObject = pReminder;
 
-					Parameter parameter6 = new Parameter();
-					parameter6.field = "@pNewReminder";
-					parameter6.valueObject = pActivity.reminder;
+			listParameter.Add(parameter3);
+			listParameter.Add(parameter1);
+			listParameter.Add(parameter6);
+			listParameter.Add(parameter2);
+			listParameter.Add(parameter5);
+			listParameter.Add(parameter4);
+			connect.request("updateCalendar", listParameter);
+			connect.CloseConnection();
 
-					listParameter.Add(parameter1);
-					listParameter.Add(parameter2);
-					listParameter.Add(parameter3);
-					listParameter.Add(parameter4);
-					listParameter.Add(parameter5);
-					listParameter.Add(parameter6);
-					connect.request("updateCalendar", listParameter);
-				}
-			}
+
 		}
 
 		public override Boolean deleteActivity(Activity pActivity)
@@ -116,7 +111,7 @@ namespace Aprende_Movil.Domain
 
 			Parameter parameter1 = new Parameter();
 			parameter1.field = "@pEmail";
-			parameter1.valueObject = user.name;
+			parameter1.valueObject = user.email;
 
 			Parameter parameter2 = new Parameter();
 			parameter2.field = "@pReminder";
@@ -124,16 +119,11 @@ namespace Aprende_Movil.Domain
 
 			listParameter.Add(parameter1);
 			listParameter.Add(parameter2);
-			foreach (Activity activity in listActivity)
-			{
-				if (pActivity.reminder == activity.reminder)
-				{
-					listActivity.Remove(activity);
-					listActivity.Add(pActivity);
-				}
-			}
 
-					connect.request("deleteReminder", listParameter);
+
+			connect.request("deleteReminder", listParameter);
+			connect.CloseConnection();
+			loadData();
 			return true;
 		}
 
@@ -147,18 +137,20 @@ namespace Aprende_Movil.Domain
 			parameter.valueObject = user.email;
 			listParamenter.Add(parameter);
 
-			MySql.Data.MySqlClient.MySqlDataReader reader = connection.request(IConstant.PROCEDURE_GET_MEDICINE, listParamenter);
+			MySql.Data.MySqlClient.MySqlDataReader reader = connection.request("getRemaninderByUser", listParamenter);
 			List<Activity> listActivity = new List<Activity>();
 			while (reader.Read())
 			{
 				Activity activity = new Activity();
 
 				activity.reminder = reader.GetString("reminder");
-				activity.notice = reader.GetInt16("notice");
+				activity.noticeTime = reader.GetDateTime("notice");
 				activity.startTime = reader.GetDateTime("startTime");
 				activity.endTime = reader.GetDateTime("endTime");
 				listActivity.Add(activity);
+				Console.WriteLine(activity.reminder);
 			}
+			reader.Close();
 			this.listActivity = listActivity;
 			return true;
 		}

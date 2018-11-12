@@ -12,5 +12,7 @@ namespace Aprende_Movil.Models
 		public DateTime startTime { get; set; }
 		public DateTime endTime { get; set; }
 		public int notice { get; set; }
+		public DateTime noticeTime { get; set; }
+
 	}
 }

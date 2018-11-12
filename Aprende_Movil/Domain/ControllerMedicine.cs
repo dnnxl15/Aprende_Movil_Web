@@ -66,52 +66,45 @@ namespace Aprende_Movil.Domain
 			listParameter.Add(parameter6);
 			listMedicine.Add(pRecipe);
 			connect.request(IConstant.PROCEDURE_INSERT_MEDICINE, listParameter);
+			connect.CloseConnection();
+			loadData();
 			return true;
 		}
 
 		public override Boolean updateMedicine(Recipe pRecipe)
 		{
-			foreach (Recipe recipe in listMedicine)
-			{
-				if (pRecipe.medicine.name == recipe.medicine.name)
-				{
-					listMedicine.Remove(recipe);
-					listMedicine.Add(pRecipe);
+			Connection connect = Connection.getInstance();
+			List<Parameter> listParameter = new List<Parameter>();
 
-					Connection connect = Connection.getInstance();
-					List<Parameter> listParameter = new List<Parameter>();
+			Parameter parameter1 = new Parameter();
+			parameter1.field = IConstant.PARAMETER_EMAIL;
+			parameter1.valueObject = user.email;
 
-					Parameter parameter1 = new Parameter();
-					parameter1.field = IConstant.PARAMETER_EMAIL;
-					parameter1.valueObject = user.email;
+			Parameter parameter2 = new Parameter();
+			parameter2.field = IConstant.PARAMETER_MEDICINE;
+			parameter2.valueObject = pRecipe.medicine.name;
 
-					Parameter parameter2 = new Parameter();
-					parameter2.field = IConstant.PARAMETER_MEDICINE;
-					parameter2.valueObject = pRecipe.medicine.name;
+			Parameter parameter3 = new Parameter();
+			parameter3.field = "@pNewQuantity";
+			parameter3.valueObject = pRecipe.quantity;
 
-					Parameter parameter3 = new Parameter();
-					parameter3.field = "@pNewQuantity";
-					parameter3.valueObject = pRecipe.quantity;
+			Parameter parameter4 = new Parameter();
+			parameter4.field = "@pNewFrequency";
+			parameter4.valueObject = pRecipe.frequency;
 
-					Parameter parameter4 = new Parameter();
-					parameter4.field = "@pNewFrequency";
-					parameter4.valueObject = pRecipe.frequency;
+			Parameter parameter5 = new Parameter();
+			parameter5.field = "@pNewStartDate";
+			parameter5.valueObject = pRecipe.startDate;
 
-					Parameter parameter5 = new Parameter();
-					parameter5.field = "@pNewStartDate";
-					parameter5.valueObject = pRecipe.startDate;
-
-					listParameter.Add(parameter1);
-					listParameter.Add(parameter2);
-					listParameter.Add(parameter3);
-					listParameter.Add(parameter4);
-					listParameter.Add(parameter5);
-					listMedicine.Add(pRecipe);
-					connect.request("updateMedication", listParameter);
-					return true;
-				}
-			}
-			return false;
+			listParameter.Add(parameter1);
+			listParameter.Add(parameter2);
+			listParameter.Add(parameter3);
+			listParameter.Add(parameter4);
+			listParameter.Add(parameter5);
+			listMedicine.Add(pRecipe);
+			connect.CloseConnection();
+			loadData();
+			connect.request("updateMedication", listParameter);
 		}
 
 		public override Boolean loadData()
@@ -141,6 +134,7 @@ namespace Aprende_Movil.Domain
 				listRecipe.Add(recipe);
 			}
 			this.listMedicine = listRecipe;
+			reader.Close();
 			return true;
 		}
 	}

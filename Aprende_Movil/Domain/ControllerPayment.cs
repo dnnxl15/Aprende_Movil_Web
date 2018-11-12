@@ -45,6 +45,8 @@ namespace Aprende_Movil.Domain
 
 			connect.request(IConstant.PROCEDURE_INSERT_PAYMENT, listParameter);
 			listPayment.Add(pPayment);
+			connect.CloseConnection();
+
 			return true;
 		}
 
@@ -65,6 +67,8 @@ namespace Aprende_Movil.Domain
 				listPayment.Add(payment);
 			}
 			this.listPayment = listPayment;
+			reader.Close();
+
 			return true;
 		}
 	}
