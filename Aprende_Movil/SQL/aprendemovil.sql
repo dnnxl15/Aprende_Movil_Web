@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2018 a las 19:58:04
+-- Tiempo de generación: 13-11-2018 a las 01:53:14
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.1.10
 
@@ -81,6 +81,13 @@ FROM calendar
 WHERE calendar.userID = getUserID(pEmail);
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getReminderByMonth` (IN `pEmail` VARCHAR(100), IN `pMonth` INT(11))  NO SQL
+BEGIN
+SELECT reminder, startTime, endTime, notice
+FROM calendar
+WHERE calendar.userID = getUserID(pEmail) AND MONTH(startTime) = pMonth;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insertCalendar` (IN `pReminder` VARCHAR(500), IN `pStartTime` DATETIME, IN `pEndTime` DATETIME, IN `pNotice` INT(11), IN `pEmail` VARCHAR(100))  NO SQL
     COMMENT 'Procedure that insert into the table Calendar'
 BEGIN 
@@ -132,7 +139,7 @@ BEGIN
     SET calendar.reminder = pNewReminder,
     calendar.startTime = pNewStartTime,
     calendar.endTime = pNewEndTime,
-    calendar.notice = getNotice(pNewStartTime, pNewNotice)
+    calendar.notice = getNoticed(pNewStartTime, pNewNotice)
     WHERE calendar.userID = getUserID(pEmail) and calendar.reminder = pReminder;
 END$$
 
@@ -221,6 +228,11 @@ RETURN NOT EXISTS(SELECT medicationsPerUser.userID, medicationsPerUser.medicineI
 	FROM medicationsPerUser WHERE medicationsPerUser.userID = getUserID(pEmail) AND medicationsPerUser.medicineID = getMedicineID(pMedicine));
 END$$
 
+CREATE DEFINER=`root`@`localhost` FUNCTION `validateUser` (`pEmail` VARCHAR(100), `pPassword` VARCHAR(100)) RETURNS TINYINT(1) NO SQL
+BEGIN
+RETURN EXISTS(SELECT user.email, user.password FROM user WHERE user.email = pEmail AND user.password = pPassword);
+END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -243,7 +255,9 @@ CREATE TABLE `calendar` (
 --
 
 INSERT INTO `calendar` (`calendarID`, `reminder`, `startTime`, `endTime`, `notice`, `userID`) VALUES
-(1, 'Examen de la vista', '2018-11-04 10:30:00', '2018-11-04 11:00:00', '2018-11-04 10:00:00', 1);
+(1, 'Examen medico', '2018-11-12 11:00:00', '2018-11-12 11:30:00', '2018-11-11 01:22:00', 1),
+(2, 'Tarea de AP', '2018-11-13 10:00:00', '2018-11-14 11:00:00', '2018-11-12 00:22:00', 1),
+(3, 'Proyecto de AP', '2018-12-30 10:30:00', '2018-12-31 11:00:00', '2018-12-29 00:52:00', 1);
 
 -- --------------------------------------------------------
 
@@ -433,7 +447,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `calendar`
 --
 ALTER TABLE `calendar`
-  MODIFY `calendarID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `calendarID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `medicationsperuser`

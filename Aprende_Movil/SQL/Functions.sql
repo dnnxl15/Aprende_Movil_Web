@@ -1,4 +1,4 @@
--- --------------------------------------------------------------------------------
+/*-- --------------------------------------------------------------------------------
 --                           VALIDATE IF EXISTS
 -- --------------------------------------------------------------------------------
 
@@ -28,7 +28,20 @@ RETURN NOT EXISTS(SELECT medicationsPerUser.userID, medicationsPerUser.medicineI
 	FROM medicationsPerUser WHERE medicationsPerUser.userID = getUserID(pEmail) AND medicationsPerUser.medicineID = getMedicineID(pMedicine));
 END$$
 DELIMITER ;
+*/
+-- Function that returns if the email and password  are correct
+-- Author: Esteban Coto Alfaro
+-- Description: This function return a boolean if email and password  are correct in the table user.
+-- Last modification: 11/11/18
 
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` FUNCTION `validateUser`(`pEmail` VARCHAR(100), `pPassword` VARCHAR(100)) RETURNS tinyint(1)
+    NO SQL
+BEGIN
+RETURN EXISTS(SELECT user.email, user.password FROM user WHERE user.email = pEmail AND user.password = pPassword);
+END$$
+DELIMITER ;
+/*
 -- --------------------------------------------------------------------------------
 -- 							 GET ID BY RECIVING VARCHAR
 -- -------------------------------------------------------------------------------- 
@@ -152,3 +165,4 @@ BEGIN
   	RETURN vNoticed;
 END$$
 DELIMITER ;
+*/
