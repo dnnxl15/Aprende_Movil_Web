@@ -58,13 +58,16 @@ namespace Aprende_Movil.Domain
 			Parameter parameter1 = new Parameter();
 			parameter1.field = IConstant.PARAMETER_EMAIL;
 			parameter1.valueObject = user.email;
-			MySqlDataReader reader = connection.request(IConstant.PROCEDURE_GET_PAYMENT, listParameter);
+            listParameter.Add(parameter1);
+            MySqlDataReader reader = connection.request(IConstant.PROCEDURE_GET_PAYMENT, listParameter);
 			List<Payment> listPayment = new List<Payment>();
 			while (reader.Read())
 			{
 				Payment payment = new Payment();
-				payment.name = reader.GetString(IConstant.VALUE_NAME);
-				listPayment.Add(payment);
+				payment.name = reader.GetString("payment");
+                payment.payDate = reader.GetDateTime("payday");
+                payment.amount = reader.GetInt32("amount");
+                listPayment.Add(payment);
 			}
 			this.listPayment = listPayment;
 			reader.Close();

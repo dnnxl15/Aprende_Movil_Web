@@ -9,31 +9,38 @@
 </head>
 <body>
 
-    <h2>Editar Medicina</h2>
+    @if (ViewBag.addNew) {<h2>Agregar nueva medicina</h2> }
+    else {<h2>Editar o Eliminar Medicina</h2>}
 
-    <form method="post">
-        <fieldset>
-            <legend>Editar/Eliminar:</legend>
-            Nombre Medicamento<br />
-            <input type="text" name="medName" value=@ViewBag.name required /><br />
-            ID Medicamento <br />
-            <input type="text" name="medId" value=@ViewBag.id required /><br />
-            Frecuencia <br />
-            <input type="number" name="medFreq" value=@ViewBag.freq required /><br />
-            Cantidad <br />
-            <input type="number" name="medQty" value=@ViewBag.qty required /><br />
-            Medida <br />
-            <input type="text" name="medMsr" value=@ViewBag.msr required /><br />
-            Fecha de Inicio <br />
-            <input type="datetime" name="medStrD" min="1900-01-01" value=@ViewBag.srtD required /><br />
-            Fecha de Fin<br />
-            <input type="datetime" name="medEndD" value=@ViewBag.endD required /><br /> <br />
-        </fieldset>
-        <input type="radio" name="option" value="edit" checked> Editar<br>
-        <input type="radio" name="option" value="delete"> Eliminar<br>
+          <form method="post">
+              Nombre Medicamento<br />
+              <input type="text" name="medName" value=@ViewBag.name required /><br />
+              ID Medicamento <br />
+              <input type="text" name="medId" value=@ViewBag.id required /><br />
+              Frecuencia <br />
+              <input type="number" name="medFreq" value=@ViewBag.freq required /><br />
+              Cantidad <br />
+              <input type="number" name="medQty" value=@ViewBag.qty required /><br />
+              Medida <br />
+              <input type="text" name="medMsr" value=@ViewBag.msr required /><br />
+              Fecha de Inicio <br />
+              <input type="date" name="medStrD" min="1900-01-01" value=@ViewBag.srtD required /><br />
+              Fecha de Fin<br />
+              <input type="date" name="medEndD" min="1900-01-01" value=@ViewBag.endD required /><br /> <br />
 
-        <input type="submit" value="Confirmar" />
-    </form>
+              @if (!ViewBag.addNew) {
+                  <div>
+                      <input type="radio" name="option" value="edit" checked>Editar<br>
+                      <input type="radio" name="option" value="delete">Eliminar<br>
+                  </div>
+              }
+              else {
+                  <div>
+                      <input type="radio" name="option" value="add" checked>Agregando<br>
+                  </div>
+              }
+              <input type="submit" value="Confirmar" />
+          </form>
 
 
 </body>

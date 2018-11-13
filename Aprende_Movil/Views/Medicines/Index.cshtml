@@ -29,7 +29,7 @@
 <body>
     <div>
         <h2>Medicinas</h2>
-        <button onclick="location.href='@Url.Action("Index", "Medicine")'">Agregar nueva Medicina</button>
+        <button onclick="location.href='@Url.Action("Index", "Medicine", new { id = "new"})'">Agregar nueva Medicina</button>
     </div>
     <div style="overflow-x:auto;">
         <table id="table_medicines">
@@ -61,8 +61,8 @@
                                                           freq=recipe.frequency,
                                                           qty=recipe.quantity,
                                                           msr=recipe.medicine.measure,
-                                                          srtD=recipe.startDate.ToString("dd-mm-yyyy"),
-                                                          endD=recipe.endDate.ToString("dd-mm-yyyy")})'" /></td>
+                                                          srtD=recipe.startDate.ToString("yyyy-mm-dd"),
+                                                          endD=recipe.endDate.ToString("yyyy-mm-dd")})'" /></td>
                 </tr>
                 }
             </tbody>
