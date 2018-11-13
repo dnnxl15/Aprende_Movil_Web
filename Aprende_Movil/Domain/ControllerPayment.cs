@@ -46,7 +46,7 @@ namespace Aprende_Movil.Domain
 			connect.request(IConstant.PROCEDURE_INSERT_PAYMENT, listParameter);
 			listPayment.Add(pPayment);
 			connect.CloseConnection();
-
+			loadData();
 			return true;
 		}
 
