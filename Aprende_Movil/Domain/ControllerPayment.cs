@@ -35,7 +35,7 @@ namespace Aprende_Movil.Domain
 			parameter1.valueObject = pPayment.name;
 			Parameter parameter2 = new Parameter();
 			parameter2.field = IConstant.PARAMETER_AMOUNT;
-			parameter2.valueObject = pPayment.frequency;
+			parameter2.valueObject = pPayment.amount;
 			Parameter parameter3 = new Parameter();
 			parameter3.field = IConstant.PARAMETER_EMAIL;
 			parameter3.valueObject = user.email;
