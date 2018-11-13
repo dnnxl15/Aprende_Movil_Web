@@ -11,7 +11,7 @@ namespace Aprende_Movil.Domain
 	{
 		public User user { get; set; }
 
-		private static ControllerUser instance;
+		private static ControllerUser instance = new ControllerUser();
 
 		private ControllerUser()
 		{

@@ -15,7 +15,7 @@ namespace Aprende_Movil.Controllers
             user.email = Request.Form["email"];
             user.password = Request.Form["userPassword"];
 
-            if (ControllerUser.getInstance().checkUser(user)) {
+            if (ControllerUser.getInstance().checkUser(user)) { //ControllerUser.getInstance().checkUser(user)) {
                 //Login Successful
                 LoginSingleton.setUser(Request.Form["email"]);
             }

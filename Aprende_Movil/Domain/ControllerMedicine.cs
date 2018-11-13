@@ -102,10 +102,9 @@ namespace Aprende_Movil.Domain
 			listParameter.Add(parameter4);
 			listParameter.Add(parameter5);
 			listMedicine.Add(pRecipe);
-			connect.CloseConnection();
-			loadData();
 			connect.request("updateMedication", listParameter);
-
+            connect.CloseConnection();
+            loadData();
             return true;
 		}
 
@@ -126,7 +125,7 @@ namespace Aprende_Movil.Domain
 				Recipe recipe = new Recipe();
 				Medicine medicine = new Medicine();
 				medicine.name = reader.GetString("name");
-				medicine.measure = reader.GetInt16("measure");
+				medicine.measure = reader.GetString("measure");
 				recipe.medicine = medicine;
 
 				recipe.quantity = reader.GetInt16("quantity");

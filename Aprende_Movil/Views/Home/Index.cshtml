@@ -50,7 +50,7 @@
     @{
         var title = "";
         var isLogged = false;
-        if (!IsPost) {
+        if (ViewBag.UserName == null) {
             title = "Debe iniciar sesión para poder continuar";
         }
         else {
@@ -72,7 +72,7 @@
         }
     *@
     <h2>@title</h2>
-    @if (!isLogged) {<button class="bottom" onclick="location.href='@Url.Action("Index", "Login")'">Ingresar</button>}
+    @if (!isLogged) {<br /><button class="bottom" onclick="location.href='@Url.Action("Index", "Login")'">Ingresar</button><br />}
     <div class="row">
         <div class="column" style="background-color:#aaa;">
             <h2>Pagos de Servicios</h2>
