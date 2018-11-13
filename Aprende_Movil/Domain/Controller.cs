@@ -69,5 +69,10 @@ namespace Aprende_Movil.Domain
 		{
 			throw new NotImplementedException();
 		}
+
+		public virtual List<Activity> loadDataMonth(int pMonth)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
