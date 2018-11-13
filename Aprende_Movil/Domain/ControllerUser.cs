@@ -52,6 +52,7 @@ namespace Aprende_Movil.Domain
 			listParameter.Add(parameter2);
 
 			MySqlParameter myRetParam = connect.requestFunction("validateUser", listParameter);
+			connect.CloseConnection();
 			int value = Int32.Parse(myRetParam.Value.ToString());
 			if (value == 1)
 			{
@@ -62,6 +63,7 @@ namespace Aprende_Movil.Domain
 			{
 				return false;
 			}
+			
 		}
 
 		
@@ -108,6 +110,7 @@ namespace Aprende_Movil.Domain
 			listParameter.Add(parameter7);
 
 			connect.request("insertUser", listParameter);
+			connect.CloseConnection();
 			return true;
 		}
 
@@ -154,6 +157,7 @@ namespace Aprende_Movil.Domain
 			listParameter.Add(parameter7);
 			user = pUser;
 			connect.request("updateUser", listParameter);
+			connect.CloseConnection();
 		}
 	}
 }
