@@ -1,4 +1,5 @@
-﻿using Aprende_Movil.Models;
+﻿using Aprende_Movil.Library;
+using Aprende_Movil.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,23 @@ namespace Aprende_Movil.Domain
 			calendar.loadData();
 			medicine.loadData();
 			payment.loadData();
+		}
+
+		public Controller getController(ControlType pControlType)
+		{
+			FactoryProducer factory = FactoryProducer.getInstance();
+			AbstractFactory controlFactory = factory.getFactory(Library.FactoryType.ControlFactoryType);
+			Controller control = controlFactory.getControl(pControlType);
+			return control;
+		}
+
+		public List<Activity> loadDataByMonth(int pMonth)
+		{
+			FactoryProducer factory = FactoryProducer.getInstance();
+			AbstractFactory controlFactory = factory.getFactory(Library.FactoryType.ControlFactoryType);
+			Controller calendar = controlFactory.getControl(Library.ControlType.ControlCalendar);
+			List<Activity>  listActivityByMonth = calendar.loadDataMonth(pMonth);
+			return listActivityByMonth;
 		}
 
 		public Boolean addUser(User pUser)
@@ -117,5 +135,7 @@ namespace Aprende_Movil.Domain
 			control.addPayment(pPayment);
 			return true;
 		}
+
+
 	}
 }

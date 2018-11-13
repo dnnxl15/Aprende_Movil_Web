@@ -1,4 +1,4 @@
--- --------------------------------------------------------------------------------
+/*-- --------------------------------------------------------------------------------
 --                                      INSERTS
 -- --------------------------------------------------------------------------------
 
@@ -283,5 +283,20 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `getPayment`()
 BEGIN
 SELECT payment.name AS name
 FROM Payment;
+END$$
+DELIMITER ;
+*/
+-- Procedure to get reminders from a user by month
+-- Author: Esteban Coto Alfaro
+-- Description: This procedure get all the reminders of a user by month.
+-- Last modification: 12/11/18
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getReminderByMonth`(IN `pEmail` VARCHAR(100), IN `pMonth` INT(11))
+    NO SQL
+BEGIN
+SELECT reminder, startTime, endTime, notice
+FROM calendar
+WHERE calendar.userID = getUserID(pEmail) AND MONTH(startTime) = pMonth;
 END$$
 DELIMITER ;

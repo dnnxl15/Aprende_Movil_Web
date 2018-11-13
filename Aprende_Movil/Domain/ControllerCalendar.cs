@@ -154,6 +154,38 @@ namespace Aprende_Movil.Domain
 			this.listActivity = listActivity;
 			return true;
 		}
+
+		public override List<Activity> loadDataMonth(int pMonth)
+		{
+			Connection connection = Connection.getInstance();
+			Boolean open = connection.OpenConnection();
+			List<Parameter> listParamenter = new List<Parameter>();
+			Parameter parameter = new Parameter();
+			parameter.field = IConstant.PARAMETER_EMAIL;
+			parameter.valueObject = user.email;
+			Parameter parameter2 = new Parameter();
+			parameter2.field = "@pMonth";
+			parameter2.valueObject = pMonth;
+			listParamenter.Add(parameter);
+			listParamenter.Add(parameter2);
+
+			MySql.Data.MySqlClient.MySqlDataReader reader = connection.request("getRemaninderByUser", listParamenter);
+			List<Activity> listActivity = new List<Activity>();
+			while (reader.Read())
+			{
+				Activity activity = new Activity();
+
+				activity.reminder = reader.GetString("reminder");
+				activity.noticeTime = reader.GetDateTime("notice");
+				activity.startTime = reader.GetDateTime("startTime");
+				activity.endTime = reader.GetDateTime("endTime");
+				listActivity.Add(activity);
+				Console.WriteLine(activity.reminder);
+			}
+			reader.Close();
+			
+			return listActivity;
+		}
 	}
 
 
