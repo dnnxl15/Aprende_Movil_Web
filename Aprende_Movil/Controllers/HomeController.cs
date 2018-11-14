@@ -19,6 +19,10 @@ namespace Aprende_Movil.Controllers
                 //Login Successful
                 LoginSingleton.setUser(Request.Form["email"]);
             }
+			else
+			{
+				return RedirectToAction("Index", "Login");
+			}
             ViewBag.UserName = LoginSingleton.getUserName();
             return View();
         }
