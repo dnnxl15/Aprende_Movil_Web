@@ -86,7 +86,7 @@
             <h2>Calendario</h2>
             <p>Agregue, vea y edite eventos de su vida diaria para que nunca se pierda esos momentos importantes de su vida.</p>
             <img src="~/Images/Calendar.jpg" alt="Calendario" class="centerimage">
-            @{if (isLogged) {<button class="bottom" onclick="location.href='@Url.Action("Index", "Calendar", new {name=ViewBag.UserName})'">Ingresar</button>}
+            @{if (isLogged) {<button class="bottom" onclick="location.href='@Url.Action("Index", "Calendar")'">Ingresar</button>}
                 else {<button class="bottom" disabled>Ingresar</button>} }
         </div>
         <div class="column" style="background-color:#aaa;">

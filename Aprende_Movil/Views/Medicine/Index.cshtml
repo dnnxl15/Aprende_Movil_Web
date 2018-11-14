@@ -15,8 +15,6 @@
           <form method="post">
               Nombre Medicamento<br />
               <input type="text" name="medName" value=@ViewBag.name required /><br />
-              ID Medicamento <br />
-              <input type="text" name="medId" value=@ViewBag.id required /><br />
               Frecuencia <br />
               <input type="number" name="medFreq" value=@ViewBag.freq required /><br />
               Cantidad <br />
@@ -25,20 +23,17 @@
               <input type="text" name="medMsr" value=@ViewBag.msr required /><br />
               Fecha de Inicio <br />
               <input type="date" name="medStrD" min="1900-01-01" value=@ViewBag.srtD required /><br />
-              Fecha de Fin<br />
-              <input type="date" name="medEndD" min="1900-01-01" value=@ViewBag.endD required /><br /> <br />
 
               @if (!ViewBag.addNew) {
-                  <div>
-                      <input type="radio" name="option" value="edit" checked>Editar<br>
-                      <input type="radio" name="option" value="delete">Eliminar<br>
-                  </div>
-              }
-              else {
-                  <div>
-                      <input type="radio" name="option" value="add" checked>Agregando<br>
-                  </div>
-              }
+          <div>
+              <input type="radio" name="option" value="edit" checked>Editar<br>
+          </div>
+}
+else {
+          <div>
+              <input type="radio" name="option" value="add" checked>Agregando<br>
+          </div>
+}
               <input type="submit" value="Confirmar" />
           </form>
 

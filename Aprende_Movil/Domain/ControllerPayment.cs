@@ -8,16 +8,52 @@ using System.Web;
 
 namespace Aprende_Movil.Domain
 {
-	public class ControllerPayment: Controller
-	{
-		private static ControllerPayment instance;
-		public List<Payment> listPayment { get; set; }
+    public class ControllerPayment : Controller {
+        private static ControllerPayment instance;
+        public List<Payment> listPayment { get; set; }
+        public List<Payment> listFuturePaymentsLuz { get; set; }
+        public List<Payment> listFuturePaymentsAgua { get; set; }
+        public Payment ultimoLuz;
+        public Payment ultimoAgua;
 
-		private ControllerPayment()
+
+        private ControllerPayment()
 		{
+            Random random = new Random();
+            listFuturePaymentsLuz = new List<Payment>();
+            
+            listFuturePaymentsAgua = new List<Payment>();
+
+            for (int i = 1; i < 10; i++) {
+                Payment payment = new Payment();
+                payment.amount = 10000 + 1237 * random.Next(0, 15);
+                payment.name = "Luz";
+                payment.payDate = new DateTime(2018, i, 13);
+                listFuturePaymentsLuz.Add(payment);
+
+                payment = new Payment();
+                payment.amount = 7600 + 1712 * random.Next(0,15);
+                payment.name = "Agua";
+                payment.payDate = new DateTime(2018, i, 13);
+                listFuturePaymentsAgua.Add(payment);
+            }
 		}
 
-		public static ControllerPayment getInstance()
+        public Payment getLuz() {
+            Payment payment = listFuturePaymentsLuz[0];
+            listFuturePaymentsLuz.Remove(payment);
+            ultimoLuz = payment;
+            return payment;
+        }
+
+        public Payment getAgua() {
+            Payment payment = listFuturePaymentsAgua[0];
+            listFuturePaymentsAgua.Remove(payment);
+            ultimoAgua = payment;
+            return payment;
+        }
+
+        public static ControllerPayment getInstance()
 		{
 			if(instance == null)
 			{

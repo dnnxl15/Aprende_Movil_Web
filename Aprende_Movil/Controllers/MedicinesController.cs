@@ -15,7 +15,6 @@ namespace Aprende_Movil.Controllers
             ControllerMedicine instance = ControllerMedicine.getInstance();
             instance.loadData();
             //ViewBag.MedicineList = instance.listMedicine;
-            ViewBag.UserName = name;
             return View(instance.listMedicine);
         }
 

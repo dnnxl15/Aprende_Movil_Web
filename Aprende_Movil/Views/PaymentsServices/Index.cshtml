@@ -83,11 +83,19 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Luz</td>
-                            <td>15/12/2018</td>
-                            <td>26200</td>
+                            <td>@ViewBag.nameLuz</td>
+                            <td>@ViewBag.payDayLuz</td>
+                            <td>@ViewBag.amountLuz</td>
                             <td>
-                                <input type="button" value="Realizar Pago" onclick = "Remove(this);" />
+                                <input type="button" value="Realizar Pago" onclick="Remove(this);" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@ViewBag.nameAgua</td>
+                            <td>@ViewBag.payDayAgua</td>
+                            <td>@ViewBag.amountAgua</td>
+                            <td>
+                                <input type="button" value="Realizar Pago" onclick="Remove(this);" />
                             </td>
                         </tr>
                     </tbody>

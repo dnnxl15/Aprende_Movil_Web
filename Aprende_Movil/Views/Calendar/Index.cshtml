@@ -1,7 +1,87 @@
-﻿@{
+﻿@model IEnumerable<Aprende_Movil.Models.Activity>
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
-@*Es acá en dónde se debe escribir el texto*@
-<h2>Calendario + @ViewBag.UserName</h2>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Calendario</h2>
+        <button onclick="location.href='@Url.Action("Index", "CalendarActivity")'">Agregar Recordatorio</button>
+    </div>
+    <div style="overflow-x:auto;">
+        <table id="table_Calendario">
+            <thead>
+                <tr>
+                    <th>Recordatorio</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Fin</th>
+                    <th>Aviso previo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var activity in Model) {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => activity.reminder)</td>
+                        <td>@Html.DisplayFor(modelItem => activity.startTime)</td>
+                        <td>@Html.DisplayFor(modelItem => activity.endTime)</td>
+                        <td>@Html.DisplayFor(modelItem => activity.noticeTime)</td>
+                        <td>
+                            <input type="button" value="Eliminar Recordatorio" onclick="Remove(this);"/>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script type="text/javascript">
+        function Remove(button) {
+            //Url.Action("Index", "Home")
+
+            //Determine the reference of the Row using the Button. .ToString("yyyy-mm-dd")
+            var row = $(button).closest("TR");
+            var name = $("TD", row).eq(0).html();
+            var srtD = $("TD", row).eq(1).html();
+            var endD = $("TD", row).eq(2).html();
+            var rmdD = $("TD", row).eq(3).html();
+            if (confirm("Eliminando el recordatorio: [" + name + "]")) {
+                //Get the reference of the Table.
+                var table = $("#table_Calendario")[0];
+
+                //Delete the Table row using it's Index. activity.noticeTime
+                table.deleteRow(row[0].rowIndex);
+
+                window.location.href = '@Url.Action("Index", "Calendar")?name=' + name + '&rmdD=' + rmdD + '&srtD=' + srtD + '&endD=' + endD;
+            }
+
+        };
+    </script>
+
+</body>
+</html>
+

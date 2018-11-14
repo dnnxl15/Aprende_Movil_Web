@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+    <h2>Agregar Recordatorio</h2>
+
+    <form method="post">
+        Nombre Recordatorio<br />
+        <input type="text" name="reminder"  required /><br />
+        Fecha Inicio <br />
+        <input type="datetime" name="startTime"  required /><br />
+        Fecha Final <br />
+        <input type="datetime" name="endTime"  required /><br />
+        Cantidad de minutos antes de ser notificado <br />
+        <input type="number" name="noticeTime"  required /><br />
+        <input type="submit" value="Confirmar" />
+    </form>
+
+
+</body>
+</html>
+

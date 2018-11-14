@@ -19,7 +19,6 @@ namespace Aprende_Movil.Controllers
                 ControllerMedicine instance = ControllerMedicine.getInstance();
 
                 if (Request.Form["option"].Equals("edit")) {
-                    
 
                     Recipe recipe = new Recipe();
                     Medicine medicine = new Medicine();
@@ -31,10 +30,9 @@ namespace Aprende_Movil.Controllers
                     recipe.frequency = int.Parse(Request.Form["medFreq"]);
                     recipe.startDate = DateTime.ParseExact(Request.Form["medStrD"], "yyyy-mm-dd",
                                        System.Globalization.CultureInfo.InvariantCulture);
-                    recipe.endDate = DateTime.ParseExact(Request.Form["medEndD"], "yyyy-mm-dd",
-                                       System.Globalization.CultureInfo.InvariantCulture);
 
                     instance.updateMedicine(recipe);
+                    
                     return RedirectToAction("Index", "Medicines");
                 }
                 if (Request.Form["option"].Equals("delete")) {

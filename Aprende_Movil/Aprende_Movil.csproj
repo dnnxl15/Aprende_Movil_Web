@@ -145,6 +145,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CalendarActivityController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -267,6 +268,7 @@
     <Content Include="Views\Medicines\Index.cshtml" />
     <Content Include="Views\PaymentsServices\Index.cshtml" />
     <Content Include="Views\Medicine\Index.cshtml" />
+    <Content Include="Views\CalendarActivity\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
